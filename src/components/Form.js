@@ -1,16 +1,31 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { fetchTodoData, sendTodoData } from "../Store/actions/todo-actions";
 import { todoActions } from "../Store/Slices/TodoSlice";
 import ListItem from "./ListItem";
 
 const Form = () => {
   const [title, setTitle] = useState("");
+
   const dispatch = useDispatch();
 
   const noOftasks = useSelector((state) => state.todo.totalTasks);
+
+  const todo = useSelector((state) => state.todo);
+
   const todos = useSelector((state) => state.todo.todos);
-  console.log(todos);
-  const inputHandler = (event) => {
+
+  useEffect(() => {
+    dispatch(fetchTodoData());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(sendTodoData(todo));
+  }, [dispatch, todo]);
+
+  console.log(todo);
+  
+  const submitHandler = (event) => {
     event.preventDefault();
     dispatch(todoActions.addTodo({ title, id: Math.random().toString() }));
     setTitle("");
@@ -18,7 +33,7 @@ const Form = () => {
 
   return (
     <Fragment>
-      <form action="" onSubmit={inputHandler}>
+      <form action="" onSubmit={submitHandler}>
         <input
           type="text"
           value={title}

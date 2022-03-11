@@ -25,6 +25,10 @@ const todoSlice = createSlice({
       state.todos = state.todos.filter((todo) => todo.id !== id);
       state.totalTasks--;
     },
+    replaceTodos(state, action) {
+      state.todos = action.payload.todos;
+      state.totalTasks = action.payload.totalTasks;
+    },
   },
 });
 
