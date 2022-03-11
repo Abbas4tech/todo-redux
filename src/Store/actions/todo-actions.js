@@ -4,7 +4,7 @@ export const fetchTodoData = () => {
   return async (dispatch) => {
     const fetchData = async () => {
       const response = await fetch(
-        "https://redux-todo-fa942-default-rtdb.firebaseio.com/todos.json"
+        "https://redux-todo-fa942-default-rtdb.firebaseio.com/ToDo'sData.json"
       );
       if (!response.ok) {
         throw new Error("Unable to fetch Data");
@@ -30,7 +30,7 @@ export const sendTodoData = (todo) => {
   return async (dispatch) => {
     const sendRequest = async () => {
       const response = fetch(
-        "https://redux-todo-fa942-default-rtdb.firebaseio.com/todos.json",
+        "https://redux-todo-fa942-default-rtdb.firebaseio.com/ToDo'sData.json",
         {
           method: "PUT",
           body: JSON.stringify({
